@@ -1,0 +1,16 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	    <g:VerticalPanel>
+	        <g:Label ui:field="subjectTitle">This is the title</g:Label>
+	         
+	       <g:InlineLabel>Field header</g:InlineLabel>
+	       <g:TextBox ui:field="investigatorName"></g:TextBox>
+	       <g:TextBox text="Organization" ui:field="organization"></g:TextBox>
+	    </g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

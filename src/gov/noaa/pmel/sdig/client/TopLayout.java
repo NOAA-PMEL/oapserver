@@ -46,35 +46,48 @@ public class TopLayout extends Composite implements HasText {
 	
 	@UiField
 	ListBox myList;
+	
 
 	public TopLayout(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
 
 		// Can access @UiField after calling createAndBindUi
-		button.setText(firstName);
+//		button.setText(firstName);
 	}
 
-	@UiHandler("button")
-	void onClick(ClickEvent e) {
-		Window.alert("Hello!");
+	@Override
+	public String getText() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
 	public void setText(String text) {
-		button.setText(text);
+		// TODO Auto-generated method stub
+		
 	}
+
+//	@UiHandler("button")
+//	void onClick(ClickEvent e) {
+//		Window.alert("Hello!");
+//	}
+//
+//	public void setText(String text) {
+//		button.setText(text);
+//	}
 
 	/**
 	 * Gets invoked when the default constructor is called
 	 * and a string is provided in the ui.xml file.
 	 */
-	public String getText() {
-		return button.getText();
-	}
-	
-	private void populateList() {
-		myList.addItem("Item one");
-		myList.addItem("Item two");
-	}
-	
+//	public String getText() {
+//		return button.getText();
+//	}
+//	
+//	private void populateList() {
+//		myList.addItem("Item one");
+//		myList.addItem("Item two");
+//	}
+//	
 
 }
