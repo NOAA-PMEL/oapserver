@@ -24,7 +24,7 @@ public class OAPMetadataEditor implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final TopLayout topLayout = new TopLayout();
-		RootPanel.get().add(topLayout);
+		// RootPanel.get().add(topLayout);
 		RootPanel.get().add(new InvestigatorPanel());
 	}
 }
