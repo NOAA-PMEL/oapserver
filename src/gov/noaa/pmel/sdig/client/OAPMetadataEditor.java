@@ -23,7 +23,7 @@ public class OAPMetadataEditor implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final TopLayout topLayout = new TopLayout();
+		// final TopLayout topLayout = new TopLayout();
 		// RootPanel.get().add(topLayout);
 		RootPanel.get().add(new InvestigatorPanel());
 	}

@@ -16,7 +16,7 @@ public class InvestigatorPanel extends Composite {
 //	@UiField Label subjectTitle;
 //	@UiField TextBox investigatorName;
 //	@UiField TextBox institution;
-	@UiField CustomTextBox address;
+//	@UiField CustomTextBox address;
 	
 	private final String title = "";
 	private final String hint = "";
@@ -35,8 +35,8 @@ public class InvestigatorPanel extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));	
 	}
 	
-	@UiFactory CustomTextBox makeCustomTextBox() {
-		return new CustomTextBox(title, hint, defaultText);
-	}
+//	@UiFactory CustomTextBox makeCustomTextBox() {
+//		return new CustomTextBox(title, hint, defaultText);
+//	}
 
 }
