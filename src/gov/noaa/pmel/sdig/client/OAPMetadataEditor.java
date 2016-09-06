@@ -3,6 +3,8 @@ package gov.noaa.pmel.sdig.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import gov.noaa.pmel.sdig.client.panels.InvestigatorPanel;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -23,8 +25,8 @@ public class OAPMetadataEditor implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		// final TopLayout topLayout = new TopLayout();
-		// RootPanel.get().add(topLayout);
-		RootPanel.get().add(new InvestigatorPanel());
+		final TopLayout topLayout = new TopLayout();
+		RootPanel.get().add(topLayout);
+		// RootPanel.get().add(new InvestigatorPanel());
 	}
 }

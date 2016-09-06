@@ -1,25 +1,24 @@
 package gov.noaa.pmel.sdig.client.widgets;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class CustomTextBox extends Composite {//TextBox {
 	
 	 String textBoxTitle;
 	 String textBoxHint;
 	 String defaultText;
-	 TextBox textBox = null;
-	 InlineLabel label = null;
-	 HorizontalPanel panel = null;
+	 int length;
 
-	public @UiConstructor CustomTextBox(String title, String hint, String defaultText) {
+	TextBox textBox = null;
+	InlineLabel label = null;
+	HorizontalPanel panel = null;
+	 
+	public @UiConstructor CustomTextBox(String title, String hint, String defaultText, int length) {
 		// super();
 		
 		panel = new HorizontalPanel();
@@ -28,6 +27,11 @@ public class CustomTextBox extends Composite {//TextBox {
 		this.defaultText = defaultText;
 		this.textBox = new TextBox();
 		textBox.setText(this.defaultText);
+		textBox.setTitle(textBoxHint);
+		
+		if (length > 0)
+			textBox.setVisibleLength(length);
+		
 		this.label = new InlineLabel(this.textBoxTitle);
 		label.setVisible(true);
 		label.setText(this.textBoxTitle);
@@ -81,6 +85,24 @@ public class CustomTextBox extends Composite {//TextBox {
 	 */
 	public void setDefaultText(String defaultText) {
 		this.defaultText = defaultText;
+	}
+	
+	/**
+	 * @return the length
+	 */
+	 public int getLength() {
+		return length;
+	}
+
+		/**
+		 * @param length of the input field
+		 */
+	public void setLength(int length) {
+		this.length = length;
+	}
+	
+	public String getCustomTextBoxValue() {
+		return this.textBox.getValue();
 	}
 	
 

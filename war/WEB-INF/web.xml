@@ -6,14 +6,34 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>gov.noaa.pmel.sdig.server.GreetingServiceImpl</servlet-class>
+<!--   <servlet> -->
+<!--     <servlet-name>greetServlet</servlet-name> -->
+<!--     <servlet-class>gov.noaa.pmel.sdig.server.GreetingServiceImpl</servlet-class> -->
+<!--   </servlet> -->
+  
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>greetServlet</servlet-name> -->
+<!--     <url-pattern>/oapmetadataeditor/greet</url-pattern> -->
+<!--   </servlet-mapping> -->
+  
+   <servlet>
+    <servlet-name>valueServlet</servlet-name>
+    <servlet-class>gov.noaa.pmel.sdig.server.ValueServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/oapmetadataeditor/greet</url-pattern>
+    <servlet-name>valueServlet</servlet-name>
+    <url-pattern>/oapmetadataeditor/values</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>listDataGenerator</servlet-name>
+    <servlet-class>gov.noaa.pmel.sdig.server.ListDataGenerator</servlet-class>
+  </servlet>
+
+      <servlet-mapping>
+    <servlet-name>listDataGenerator</servlet-name>
+    <url-pattern>/listData/countrycodes</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
