@@ -16,21 +16,19 @@ import gov.noaa.pmel.sdig.shared.CountryCodes;
 
 public class SubmitterPanel extends Composite {
 
-	private static SubmitterPanelUiBinder uiBinder = GWT.create(SubmitterPanelUiBinder.class);
-	private ValueServiceAsync services;
-	
-	@UiField
-	CustomTextBox insititution;
+	@UiField CustomTextBox insititution;
 	@UiField CustomTextBox address;
 	@UiField NameTextBox name;
 	@UiField PhoneNumber phoneNumber;
 
+	private static SubmitterPanelUiBinder uiBinder = GWT.create(SubmitterPanelUiBinder.class);
+	private ValueServiceAsync services;
 	interface SubmitterPanelUiBinder extends UiBinder<Widget, SubmitterPanel> {
 	}
 
 	public SubmitterPanel() {
 		initWidget(uiBinder.createAndBindUi(this));
-		initWidget(uiBinder.createAndBindUi(this));
+		//initWidget(uiBinder.createAndBindUi(this));
 
 		services = GWT.create(ValueService.class);
 
