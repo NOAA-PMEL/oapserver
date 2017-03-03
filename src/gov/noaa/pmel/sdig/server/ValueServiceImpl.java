@@ -7,6 +7,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -68,7 +70,9 @@ public class ValueServiceImpl extends RemoteServiceServlet implements ValueServi
 		  SortedMap<String, String> countryMap = new TreeMap<String, String>();
 		  
 	        try {
-	            Object obj = parser.parse(new FileReader("resources/country_codes.json"));
+
+	            String country_path = getServletContext().getRealPath("resources/country_codes.json");
+	            Object obj = parser.parse(new FileReader(country_path));
 	 
 	            JSONObject jsonObject = (JSONObject) obj;
 	            JSONArray countries = (JSONArray) jsonObject.get("countries");
