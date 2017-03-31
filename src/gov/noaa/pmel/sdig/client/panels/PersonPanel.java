@@ -12,8 +12,7 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import gov.noaa.pmel.sdig.client.ClientFactory;
-import gov.noaa.pmel.sdig.client.Constants;
-import gov.noaa.pmel.sdig.client.event.PersonSave;
+import gov.noaa.pmel.sdig.client.event.SectionSave;
 import gov.noaa.pmel.sdig.client.widgets.ButtonDropDown;
 import gov.noaa.pmel.sdig.shared.bean.Person;
 import org.gwtbootstrap3.client.ui.Button;
@@ -21,7 +20,6 @@ import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
-import org.gwtbootstrap3.client.ui.gwt.DataGrid;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyType;
 import org.gwtbootstrap3.extras.notify.client.ui.Notify;
@@ -96,6 +94,7 @@ public class PersonPanel extends Composite {
         idNames.add("Researcher ID ");
         idValues.add("researcherId");
         idType.init("Pick and ID Type ", idNames, idValues);
+
         people.setKeyboardSelectionPolicy(HasKeyboardSelectionPolicy.KeyboardSelectionPolicy.ENABLED);
 
         // Add a text column to show the name.
@@ -130,7 +129,7 @@ public class PersonPanel extends Composite {
             settings.setPlacement(NotifyPlacement.TOP_CENTER);
             Notify.notify("Entry is not complete! See form fields highlighted in red.", settings);
         } else {
-            eventBus.fireEventFromSource(new PersonSave(getPerson(), this.type), PersonPanel.this);
+            eventBus.fireEventFromSource(new SectionSave(getPerson(), this.type), PersonPanel.this);
             List<Person> addPerson = new ArrayList<Person>();
             addPerson.add(getPerson());
             people.setRowData(people.getRowCount(), addPerson);

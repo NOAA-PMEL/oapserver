@@ -1,26 +1,52 @@
 package gov.noaa.pmel.sdig.shared.bean;
 
 /**
- * Created by rhs on 3/3/17.
+ * Created by rhs on 3/7/17.
  */
 public class Platform {
+    String name;
+    String platformId;
+    String country;
+    String owner;
+    String platformType;
 
-    String title;
-    String platformAbstract;
-
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPlatformAbstract() {
-        return platformAbstract;
+    public String getPlatformId() {
+        return platformId;
     }
 
-    public void setPlatformAbstract(String platformAbstract) {
-        this.platformAbstract = platformAbstract;
+    public void setPlatformId(String platformId) {
+        this.platformId = platformId;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getPlatformType() {
+        return platformType;
+    }
+
+    public void setPlatformType(String platformType) {
+        this.platformType = platformType;
     }
 }

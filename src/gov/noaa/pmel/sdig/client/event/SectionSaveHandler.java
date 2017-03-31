@@ -5,6 +5,6 @@ import com.google.gwt.event.shared.EventHandler;
 /**
  * Created by rhs on 2/28/17.
  */
-public interface PersonSaveHandler extends EventHandler {
-    void onPersonSave(PersonSave event);
+public interface SectionSaveHandler extends EventHandler {
+    void onSectionSave(SectionSave event);
 }
