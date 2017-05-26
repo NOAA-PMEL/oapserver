@@ -28,7 +28,7 @@
                         <b:Column size="SM_12">
                             <b:FormGroup>
                                 <b:FormLabel for="purpose" text="Purpose"></b:FormLabel>
-                                <b:TextBox ui:field="purpose" allowBlank="false" placeholder="Purpose" b:id="purpose"></b:TextBox>
+                                <b:TextBox ui:field="purpose" allowBlank="true" placeholder="Purpose" b:id="purpose"></b:TextBox>
                             </b:FormGroup>
                         </b:Column>
                     </b:Row>
@@ -56,7 +56,7 @@
                         <b:Column size="SM_2">
                             <b:FormGroup>
                                 <b:FormLabel for="section" text="Section"></b:FormLabel>
-                                <b:TextBox ui:field="section" allowBlank="false" placeholder="Section" b:id="section"></b:TextBox>
+                                <b:TextBox ui:field="section" allowBlank="true" placeholder="Section" b:id="section"></b:TextBox>
                             </b:FormGroup>
                         </b:Column>
                     </b:Row>

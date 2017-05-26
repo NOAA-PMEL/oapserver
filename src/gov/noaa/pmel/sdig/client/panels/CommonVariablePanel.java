@@ -1,12 +1,16 @@
 package gov.noaa.pmel.sdig.client.panels;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import gov.noaa.pmel.sdig.client.ClientFactory;
 import gov.noaa.pmel.sdig.client.widgets.ButtonDropDown;
 import gov.noaa.pmel.sdig.shared.bean.Variable;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.TextArea;
@@ -22,6 +26,12 @@ public class CommonVariablePanel extends Composite {
 
     @UiField
     Heading heading;
+
+    @UiField
+    Form form;
+
+    @UiField
+    Button save;
 
     // 001 Variable abbreviation in data files
     @UiField
@@ -49,11 +59,11 @@ public class CommonVariablePanel extends Composite {
 
     // 008 Sampling instrument
     @UiField
-    ButtonDropDown samplingInstrument;
+    TextBox samplingInstrument;
 
     // 009 Analyzing instrument
     @UiField
-    ButtonDropDown analyzingInstrument;
+    TextBox analyzingInstrument;
 
     // 010 Detailed sampling and analyzing information
     @UiField
@@ -159,6 +169,8 @@ public class CommonVariablePanel extends Composite {
     FormGroup referenceMethodForm;
 
 
+    ClientFactory clientFactory = GWT.create(ClientFactory.class);
+    EventBus eventBus = clientFactory.getEventBus();
 
 //TODO initialize the cell type dropdown.
 
@@ -190,22 +202,91 @@ public class CommonVariablePanel extends Composite {
 
     }
     public void show(Variable variable) {
-        if ( variable.getAbbreviation() != null )
+        if ( variable.getAbbreviation() != null ) {
             abbreviation.setText(variable.getAbbreviation());
-        if ( variable.getObservationDetail() != null )
+        }
+        if ( variable.getObservationDetail() != null ) {
             observationDetail.setSelected(variable.getObservationDetail());
-        if ( variable.getManipulationMethod() != null )
+        }
+        if ( variable.getManipulationMethod() != null ) {
             manipulationMethod.setText(variable.getManipulationMethod());
+        }
         if ( variable.getObservationType() != null ) {
             observationType.setText(variable.getObservationType());
         }
+        if ( variable.getUnits() != null ) {
+            units.setText(variable.getUnits());
+        }
+        if ( variable.getMeasured() != null ) {
+            measured.setTitle(variable.getMeasured());
+        }
+        if ( variable.getSamplingInstrument() != null ) {
+            samplingInstrument.setText(variable.getSamplingInstrument());
+        }
+        if ( variable.getAnalyzingInstrument() != null ) {
+            analyzingInstrument.setText(variable.getAnalyzingInstrument());
+        }
+        if ( variable.getDetailedInformation() != null ) {
+            detailedInformation.setText(variable.getDetailedInformation());
+        }
+        if ( variable.getFieldReplicate() != null ) {
+            fieldReplicate.setText(variable.getFieldReplicate());
+        }
+        if ( variable.getUncertainty() != null ) {
+            uncertainty.setText(variable.getUncertainty());
+        }
+        if ( variable.getQualityFlag() != null ) {
+            qualityFlag.setText(variable.getQualityFlag());
+        }
+        if ( variable.getResearcherName() != null ) {
+            researcherName.setText(variable.getResearcherName());
+        }
+        if ( variable.getResearcherInstitution() != null ) {
+            researcherInstitution.setText(variable.getResearcherInstitution());
+        }
+        if ( variable.getFullVariableName() != null ) {
+            fullVariableName.setText(variable.getFullVariableName());
+        }
+        if ( variable.getReferenceMethod() != null ) {
+            referenceMethod.setText(variable.getReferenceMethod());
+        }
     }
 
-    public ButtonDropDown getSamplingInstrument() {
-        return samplingInstrument;
-    }
-    public ButtonDropDown getAnalyzingInstrument() {
-        return analyzingInstrument;
-    }
+    public Variable getCommonVariable() {
 
+        Variable commonVariable = new Variable();
+
+        fillCommonVariable(commonVariable);
+
+        return commonVariable;
+
+    }
+    public Variable fillCommonVariable(Variable commonVariable) {
+        commonVariable.setAbbreviation(abbreviation.getText());
+        commonVariable.setObservationType(observationType.getText());
+        commonVariable.setManipulationMethod(manipulationMethod.getText());
+        commonVariable.setObservationDetail(observationDetail.getValue());
+        commonVariable.setUnits(units.getText());
+        commonVariable.setMeasured(measured.getValue());
+        commonVariable.setSamplingInstrument(samplingInstrument.getText());
+        commonVariable.setAnalyzingInstrument(analyzingInstrument.getText());
+        commonVariable.setDetailedInformation(detailedInformation.getText());
+        commonVariable.setFieldReplicate(fieldReplicate.getText());
+        commonVariable.setUncertainty(uncertainty.getText());
+        commonVariable.setQualityFlag(qualityFlag.getText());
+        commonVariable.setResearcherName(researcherName.getText());
+        commonVariable.setResearcherInstitution(researcherInstitution.getText());
+        commonVariable.setFullVariableName(fullVariableName.getText());
+        commonVariable.setReferenceMethod(referenceMethod.getText());
+        return commonVariable;
+    }
+    public boolean valid() {
+        String valid = String.valueOf(form.validate());
+        if (valid.equals("false") ||
+                valid.equals("0")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

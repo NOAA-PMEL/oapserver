@@ -120,10 +120,18 @@ public class TimeAndLocationPanel extends Composite {
             NotifySettings settings = NotifySettings.newSettings();
             settings.setType(NotifyType.WARNING);
             settings.setPlacement(NotifyPlacement.TOP_CENTER);
-            Notify.notify("Entry is not complete! See form fields highlighted in red.", settings);
+            Notify.notify(Constants.NOT_COMPLETE, settings);
         } else {
             eventBus.fireEventFromSource(new SectionSave(getTimeAndLocation(), this.type), TimeAndLocationPanel.this);
         }
     }
-
+    public boolean valid() {
+        String valid = String.valueOf(form.validate());
+        if (valid.equals("false") ||
+                valid.equals("0")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

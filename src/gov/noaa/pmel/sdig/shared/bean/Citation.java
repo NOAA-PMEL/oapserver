@@ -15,6 +15,15 @@ public class Citation {
     String citationAuthorList;
     String references;
     String supplementalInformation;
+    String researchProjects;
+
+    public String getResearchProjects() {
+        return researchProjects;
+    }
+
+    public void setResearchProjects(String researchProjects) {
+        this.researchProjects = researchProjects;
+    }
 
     public String getCruiseId() {
         return cruiseId;

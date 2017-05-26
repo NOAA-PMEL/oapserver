@@ -19,75 +19,103 @@ import java.util.List;
  * Created by rhs on 3/8/17.
  */
 public class VariablePanel extends Composite {
+/*
+ *
 
+Private variable index number
+<internal
+Don't know which of several that these belongs to
+<correction
+<description
+<model
+
+
+*/
     @UiField
     Heading heading;
 
     // 001 Variable abbreviation in data files
+    // <abbrev>
     @UiField
     TextBox abbreviation;
 
     // 002 Observation type
+    // <observationType>
     @UiField
     TextBox observationType;
 
     // 003 Manipulation method
+    // <manipulationMethod>
     @UiField
     TextBox manipulationMethod;
 
     // 004 In-situ observation / manipulation condition / response variable
+    // <insitu>
     @UiField
     ButtonDropDown observationDetail;
 
     // 005 Variable unit
+    // <unit>
     @UiField
     TextBox units;
 
     // 006 Measured or calculated
+    // <measured>
     @UiField
     ButtonDropDown measured;
 
     // 007 Calculation method and parameters
+    // <calcMethod>
     @UiField
     TextBox calculationMethod;
 
     // 008 Sampling instrument
+    // <samplingInstrument>
     @UiField
     ButtonDropDown samplingInstrument;
 
     // 009 Analyzing instrument
+    // <analyzingInstrument>
     @UiField
     ButtonDropDown analyzingInstrument;
 
     // 010 Detailed sampling and analyzing information
+    // <detailedInfo>
     @UiField
     TextArea detailedInformation;
 
     // 011 Field replicate information
+    // <replicate>
     @UiField
     TextBox fieldReplicate;
 
     // 012 Standardization technique description
+    // <standardization><description>
     @UiField
     TextBox standardizationTechnique;
 
     // 013 Frequency of standardization
+    // <standardization><frequency>
     @UiField
     TextBox freqencyOfStandardization;
 
     // 014 CRM manufacturer
+    // <crm><manufacturer>
     @UiField
     TextBox crmManufacture;
 
     // 015 Batch Number
+    // <crm><batch>
     @UiField
     TextBox batchNumber;
 
     // 016 Storage method
+    // <storageMethod>
     @UiField
     TextBox storageMethod;
 
     // 017 Poison used to kill the sample
+    // <poison><poisonName>
     @UiField
     TextBox poison;
 
@@ -100,106 +128,132 @@ public class VariablePanel extends Composite {
     TextBox poisonDescription;
 
     // 020 Uncertainty
+    // <standardization><standardgas><uncertainty>
     @UiField
     TextBox uncertainty;
 
     // 021 Data quality flag description
+    // <flag>
     @UiField
     TextBox qualityFlag;
 
     // 022 Researcher Name
+    // <researcherName>
     @UiField
     TextBox researcherName;
 
     // 023 Researcher Institution
+    // <researcherInstitution>
     @UiField
     TextBox researcherInstitution;
 
     // 024 at what temperature was pCO2 reported
+    // <co2ReportTemperature>
     @UiField
     TextBox pCO2temperature;
 
     // 025 at what temperature was pH reported
+    // <phReportTemperature>
     @UiField
     TextBox pHtemperature;
 
     // 026 Biological subject
+    // <biologicalSubject>
     @UiField
     TextBox biologicalSubject;
 
     // 027 Cell type (open or closed)
+    // <cellType>
     @UiField
     ButtonDropDown cellType;
 
     // 028 Concentrations of standard gas
+    // <standardization><standardgas><concentration>
     @UiField
     TextBox gasConcentration;
 
     // 029 Curve fitting method
+    // <curveFitting>
     @UiField
     TextBox curveFittingMethod;
 
     // 030 Depth of seawater intake
+    // <DepthSeawaterIntake>
     @UiField
     TextBox intakeDepth;
 
     // 031 Drying method for CO2 gas
+    // <dryMethod>
     @UiField
     TextBox dryingMethod;
 
     // 032 Duration (for settlement/colonization methods)
+    // <duration>
     @UiField
     TextBox duration;
 
     // 033 Equilibrator type
+    // <equilibrator><type>
     @UiField
     TextBox equilibratorType;
 
     // 034 Equilibrator volume (L)
+    // <equilibrator><volume>
     @UiField
     TextBox equilibratorVolume;
 
     // 035 Full variable name
+    // <fullname>
     @UiField
     TextBox fullVariableName;
 
     // 036 Headspace gas flow rate (L/min)
+    // <gasFlowRate>
     @UiField
     TextBox gasFlowRate;
 
     // 037 Headspace volume (mL)
+    // <headspacevol>
     @UiField
     TextBox headspaceVolume;
 
     // 038 How was pressure inside the equilibrator measured.
+    // <equilibrator><pressureEquilibratorMethod>
     @UiField
     TextBox equilibratorPressureMeasureMethod;
 
     // 039 How was temperature inside the equilibrator measured .
+    // <equilibrator><temperatureEquilibratorMethod>
     @UiField
     TextBox equilibratorTemperatureMeasureMethod;
 
     // 040 Life stage of the biological subject
+    // <lifeStage>
     @UiField
     TextBox lifeStage;
 
     // 041 Location of seawater intake
+    // <locationSeawaterIntake>
     @UiField
     TextBox intakeLocation;
 
     // 042 Magnitude of blank correction
+    // <blank>
     @UiField
     TextBox magnitudeOfBlankCorrection;
 
     // 043 Manufacturer of standard gas
+    // <standardization><standardgas><manufacture>
     @UiField
     TextBox standardGasManufacture;
 
     // 044 Manufacturer of the gas detector
+    // <gasDetector> ???
     @UiField
     TextBox gasDetectorManufacture;
 
     // 045 Method reference (citation)
+    // <methodReference>
     @UiField
     TextBox referenceMethod;
 
@@ -208,6 +262,7 @@ public class VariablePanel extends Composite {
     TextBox gasDetectorModel;
 
     // 047 pH scale
+    // <phscale>
     @UiField
     TextBox pHscale;
 
@@ -216,34 +271,45 @@ public class VariablePanel extends Composite {
     TextBox pHstandards;
 
     // 049 Resolution of the gas detector
+    // <resolution>
     @UiField
     TextBox gasDectectorResolution;
 
     // 050 Seawater volume (mL)
+    // <seawatervol>
     @UiField
     TextBox seawaterVolume;
 
     // 051 Species Identification code
+    // <speciesID>
     @UiField
     TextBox speciesIdCode;
 
     // 052 Temperature correction method
+    // ???
+    // <temperatureCorrectionMethod>
+    // <temperatureCorrection>
     @UiField
     TextBox temperatureCorrectionMethod;
 
     // 053 Temperature of measurement
+    // <temperatureMeasure>
     @UiField
     TextBox temperatureMeasurement;
 
     // 054 Temperature of standardization
+    // <temperatureStandardization>
+    // <temperatureStd
     @UiField
     TextBox temperatureStandarization;
 
     // 055 Type of titration
+    // <titrationType>
     @UiField
     TextBox titrationType;
 
     // 056 Uncertainties of standard gas
+    // <standard
     @UiField
     TextBox standardGasUncertainties;
 
@@ -252,14 +318,17 @@ public class VariablePanel extends Composite {
     TextBox gasDectectorUncertainty;
 
     // 058 Vented or not
+    // <equilibrator><vented>
     @UiField
     TextBox vented;
 
     // 059 Water flow rate (L/min)
+    // <equilabrator><waterFlowRate>
     @UiField
     TextBox flowRate;
 
     // 060 Water vapor correction method
+    // <waterVaporCorrection>
     @UiField
     TextBox vaporCorrection;
 
@@ -319,6 +388,7 @@ public class VariablePanel extends Composite {
     FormGroup freqencyOfStandardizationForm;
 
     // 014 CRM manufacturer
+    // <crm>
     @UiField
     FormGroup crmManufactureForm;
 
@@ -535,6 +605,8 @@ public class VariablePanel extends Composite {
         measuredValues.add("calculated");
         measured.init("Measured or Calculated ", measuredNames, measuredValues);
 
+
+
     }
     public void show(Variable variable) {
         if ( variable.getAbbreviation() != null )
@@ -554,5 +626,7 @@ public class VariablePanel extends Composite {
     public ButtonDropDown getAnalyzingInstrument() {
         return analyzingInstrument;
     }
+
+
 
 }

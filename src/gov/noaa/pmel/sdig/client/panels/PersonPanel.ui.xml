@@ -39,7 +39,7 @@
                         <b:Column size="SM_12">
                             <b:FormGroup>
                                 <b:FormLabel for="address1" text="Address Line 1"></b:FormLabel>
-                                <b:TextBox ui:field="address1" allowBlank="false" placeholder="Address First Line" b:id="address1">
+                                <b:TextBox ui:field="address1" allowBlank="true" placeholder="Address First Line" b:id="address1">
                                 </b:TextBox>
                             </b:FormGroup>
                         </b:Column>
@@ -80,7 +80,7 @@
                         <b:Column size="SM_4">
                             <b:FormGroup>
                                 <b:FormLabel for="telephone" text="Telephone Number"></b:FormLabel>
-                                <b:TextBox ui:field="telephone" allowBlank="false" placeholder="Telephone Number" b:id="telephone"></b:TextBox>
+                                <b:TextBox ui:field="telephone" allowBlank="true" placeholder="Telephone Number" b:id="telephone"></b:TextBox>
                             </b:FormGroup>
                         </b:Column>
                         <b:Column size="SM_8">
@@ -100,13 +100,18 @@
                         <b:Column size="SM_4">
                             <b:FormGroup>
                                 <b:FormLabel for="id" text="Researcher ID"></b:FormLabel>
-                                <b:TextBox ui:field="rid" allowBlank="false" placeholder="Researcher ID" b:id="id"></b:TextBox>
+                                <b:TextBox ui:field="rid" allowBlank="true" placeholder="Researcher ID" b:id="id"></b:TextBox>
                             </b:FormGroup>
                         </b:Column>
                     </b:Row>
                     <b:Row>
                         <b:Column size="SM_12">
                             <b:gwt.CellTable ui:field="people" visible="false" bordered="true" condensed="true" striped="true" hover="true"></b:gwt.CellTable>
+                        </b:Column>
+                    </b:Row>
+                    <b:Row>
+                        <b:Column size="SM_12">
+                            <b:Pagination ui:field="peoplePagination"/>
                         </b:Column>
                     </b:Row>
                     <b:Row>

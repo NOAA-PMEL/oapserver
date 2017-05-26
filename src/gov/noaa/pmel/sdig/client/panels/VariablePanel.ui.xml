@@ -64,8 +64,8 @@
         058 Vented or not
         059 Water flow rate (L/min)
         060 Water vapor correction method
-
         -->
+
         <b:Form ui:field="form">
             <b:FieldSet>
                 <b:Heading ui:field="heading" size="H3" text="Enter the Variable Information"></b:Heading>
@@ -83,7 +83,6 @@
                                 <b:TextBox ui:field="observationType" allowBlank="false" placeholder="Observation Type" b:id="observationType"></b:TextBox>
                             </b:FormGroup>
                         </b:Column>
-
                         <b:Column size="SM_4">
                             <b:FormGroup ui:field="manipulationMethodForm">
                                 <b:FormLabel for="manipulationMethod" text="Manipulation Method"></b:FormLabel>

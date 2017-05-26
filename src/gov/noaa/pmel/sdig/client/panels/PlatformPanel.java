@@ -1,23 +1,33 @@
 package gov.noaa.pmel.sdig.client.panels;
 
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy;
+import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.RangeChangeEvent;
 import gov.noaa.pmel.sdig.client.ClientFactory;
 import gov.noaa.pmel.sdig.client.Constants;
 import gov.noaa.pmel.sdig.client.event.SectionSave;
 import gov.noaa.pmel.sdig.shared.bean.Platform;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Form;
+import org.gwtbootstrap3.client.ui.Pagination;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
+import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyType;
@@ -54,7 +64,15 @@ public class PlatformPanel extends Composite {
     @UiField
     Form form;
 
+    @UiField
+    Pagination platformPagination;
+
+
     boolean showTable = true;
+
+    ListDataProvider<Platform> platformsData = new ListDataProvider<Platform>();
+
+    private SimplePager cellTablePager = new SimplePager();
 
     String type = Constants.SECTION_PLATFORMS;
 
@@ -66,6 +84,23 @@ public class PlatformPanel extends Composite {
     public PlatformPanel() {
         initWidget(ourUiBinder.createAndBindUi(this));
         platforms.setKeyboardSelectionPolicy(HasKeyboardSelectionPolicy.KeyboardSelectionPolicy.ENABLED);
+
+        Column<Platform, String> edit = new Column<Platform, String>(new ButtonCell(IconType.EDIT, ButtonType.PRIMARY, ButtonSize.EXTRA_SMALL)) {
+            @Override
+            public String getValue(Platform object) {
+                return "Edit";
+            }
+        };
+        edit.setFieldUpdater(new FieldUpdater<Platform, String>() {
+            @Override
+            public void update(int index, Platform platform, String value) {
+                show(platform);
+                platformsData.getList().remove(platform);
+                platformsData.flush();
+                platformPagination.rebuild(cellTablePager);
+            }
+        });
+        platforms.addColumn(edit);
 
         // Add a text column to show the name.
         TextColumn<Platform> nameColumn = new TextColumn<Platform>() {
@@ -82,7 +117,7 @@ public class PlatformPanel extends Composite {
                 return object.getPlatformType();
             }
         };
-        platforms.addColumn(platformTypeColumn, "Platform ID");
+        platforms.addColumn(platformTypeColumn, "Platform Type");
 
         TextColumn<Platform> platformIdColumn = new TextColumn<Platform>() {
             @Override
@@ -91,6 +126,40 @@ public class PlatformPanel extends Composite {
             }
         };
         platforms.addColumn(platformIdColumn, "Platform ID");
+
+        Column<Platform, String> delete = new Column<Platform, String>(new ButtonCell(IconType.TRASH, ButtonType.DANGER, ButtonSize.EXTRA_SMALL)) {
+            @Override
+            public String getValue(Platform object) {
+                return "Delete";
+            }
+        };
+        delete.setFieldUpdater(new FieldUpdater<Platform, String>() {
+            @Override
+            public void update(int index, Platform platform, String value) {
+                platformsData.getList().remove(platform);
+                platformsData.flush();
+                platformPagination.rebuild(cellTablePager);
+                if ( platformsData.getList().size() == 0 ) {
+                    setTableVisible(false);
+                }
+            }
+        });
+        platforms.addColumn(delete);
+
+        platforms.addRangeChangeHandler(new RangeChangeEvent.Handler() {
+
+            @Override
+            public void onRangeChange(final RangeChangeEvent event) {
+                platformPagination.rebuild(cellTablePager);
+            }
+        });
+
+        cellTablePager.setDisplay(platforms);
+
+        platforms.setPageSize(4);
+
+        platformsData.addDataDisplay(platforms);
+
     }
 
     public Platform getPlatform() {
@@ -128,24 +197,52 @@ public class PlatformPanel extends Composite {
             NotifySettings settings = NotifySettings.newSettings();
             settings.setType(NotifyType.WARNING);
             settings.setPlacement(NotifyPlacement.TOP_CENTER);
-            Notify.notify("Entry is not complete! See form fields highlighted in red.", settings);
+            Notify.notify(Constants.NOT_COMPLETE, settings);
         } else {
-            List<Platform> plats = new ArrayList<Platform>();
             Platform p = getPlatform();
-            plats.add(p);
+            platformsData.getList().add(p);
+            platformsData.flush();
+            platformPagination.rebuild(cellTablePager);
             eventBus.fireEventFromSource(new SectionSave(p, this.type), PlatformPanel.this);
-            platforms.setRowData(platforms.getRowCount(), plats);
             NotifySettings settings = NotifySettings.newSettings();
             settings.setType(NotifyType.SUCCESS);
             settings.setPlacement(NotifyPlacement.TOP_CENTER);
-            Notify.notify("Entry Saved!", settings);
+            Notify.notify(Constants.COMPLETE, settings);
             if ( showTable ) {
                 platforms.setVisible(true);
                 form.reset();
             }
         }
     }
-    public CellTable getPlatforms() {
-        return platforms;
+    public List<Platform> getPlatforms() {
+        return platformsData.getList();
+    }
+
+    public void addPlatforms(List<Platform> platformsList) {
+        for (int i = 0; i < platformsList.size(); i++) {
+            Platform p = platformsList.get(i);
+            platformsData.getList().add(p);
+        }
+        platformsData.flush();
+        platformPagination.rebuild(cellTablePager);
+        setTableVisible(true);
+    }
+
+    public void setTableVisible(boolean v) {
+        platforms.setVisible(v);
+        platformPagination.setVisible(v);
+    }
+    public boolean valid() {
+        String valid = String.valueOf(form.validate());
+        if (valid.equals("false") ||
+                valid.equals("0")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void reset() {
+        form.reset();
     }
 }
