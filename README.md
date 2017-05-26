@@ -1,5 +1,5 @@
 # oapserver
-This is the server-side component of the OAP Metadata Editor.
+This is the server-side component of the [OAP Metadata Editor] (https://github.com/NOAA-PMEL/OAPMetadataEditor).
 
 This server will:
 
